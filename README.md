@@ -181,7 +181,6 @@ export default {
     return {
     }
   },
-  components: { CardNumber, CardExpiry, CardCvc },
   methods: {
     useStripeAccount () {
      setStripeAccount("acct_1032D82eZvKYlo2C",stripe)
