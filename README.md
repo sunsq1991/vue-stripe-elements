@@ -167,3 +167,23 @@ export default {
 | handleCardAction() | https://stripe.com/docs/stripe-js/reference#stripe-handle-card-action |
 | confirmPaymentIntent() | https://stripe.com/docs/stripe-js/reference#stripe-confirm-payment-intent |
 | createPaymentMethod() | https://stripe.com/docs/stripe-js/reference#stripe-create-payment-method |
+
+## Set Stripe account
+Call function setStripeAccount(stripe_account, stripe_key)
+<script>
+import { setStripeAccount } from 'vue-stripe-elements-plus'
+
+export default {
+  props: [ 'stripe', 'options' ],
+  data () {
+    return {
+    }
+  },
+  components: { CardNumber, CardExpiry, CardCvc },
+  methods: {
+    useStripeAccount () {
+     setStripeAccount("acct_1032D82eZvKYlo2C",stripe)
+  },
+
+}
+</script>

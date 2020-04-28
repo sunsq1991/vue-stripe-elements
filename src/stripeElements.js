@@ -1,19 +1,20 @@
 export const Stripe = {
-  instance: null,
-  createToken: null,
-  createSource: null,
-  retrieveSource: null,
-  paymentRequest: null,
-  redirectToCheckout: null,
-  retrievePaymentIntent: null,
-  handleCardPayment: null,
-  handleCardSetup: null,
-  handleCardAction: null,
-  confirmCardPayment: null,
-  confirmPaymentIntent: null,
-  createPaymentMethod: null,
-  elements: null
-}
+         instance: null,
+         createToken: null,
+         createSource: null,
+         retrieveSource: null,
+         paymentRequest: null,
+         redirectToCheckout: null,
+         retrievePaymentIntent: null,
+         handleCardPayment: null,
+         handleCardSetup: null,
+         handleCardAction: null,
+         confirmCardPayment: null,
+         confirmPaymentIntent: null,
+         createPaymentMethod: null,
+         elements: null,
+         setStripeAccount: null,
+       };
 
 export const baseStyle = {
   base: {
@@ -40,7 +41,7 @@ function init(key, options = {}) {
   if (window.Stripe === undefined && Stripe.instance === null) {
     console.error('Stripe V3 library not loaded!')
   } else if (Stripe.instance === null) {
-    Stripe.instance = window.Stripe(key)
+    Stripe.instance = window.Stripe(key);
   }
 
   if (!Stripe.instance.elements) {
@@ -68,7 +69,11 @@ export function create(elementType, key_or_stripe, options = {}) {
   Stripe.confirmCardPayment = (clientSecret, data) => Stripe.instance.confirmCardPayment(clientSecret, {payment_method:{card: element}}, data)
   Stripe.confirmPaymentIntent = (clientSecret, data) => Stripe.instance.confirmPaymentIntent(clientSecret, element, data)
   Stripe.createPaymentMethod = (cardType, data) => Stripe.instance.createPaymentMethod(cardType, element, data)
-  
+  Stripe.setStripeAccount = (stripe_account, key) => {
+    Stripe.instance = window.Stripe(key, {
+      stripeAccount: stripe_account,
+    });
+  };
   return element
 }
 
