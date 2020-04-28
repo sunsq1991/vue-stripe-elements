@@ -170,6 +170,8 @@ export default {
 
 ## Set Stripe account
 Call function setStripeAccount(stripe_account, stripe_key)
+
+```html
 <script>
 import { setStripeAccount } from 'vue-stripe-elements-plus'
 
@@ -187,3 +189,4 @@ export default {
 
 }
 </script>
+```
