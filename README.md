@@ -189,3 +189,32 @@ export default {
 }
 </script>
 ```
+## Set Stripe Api version:
+this is to use different stripe api version from your dashboard configured version,
+```html
+<template>
+  <div class='credit-card-inputs' :class='{ complete }'>
+    <card-number class='stripe-element card-number'
+      ref='cardNumber'
+      :stripe='stripe'
+      :options='options'
+      version:'2020-03-02'
+      @change='number = $event.complete'
+    />
+    <card-expiry class='stripe-element card-expiry'
+      ref='cardExpiry'
+      :stripe='stripe'
+      :options='options'
+      version:'2020-03-02'
+      @change='expiry = $event.complete'
+    />
+    <card-cvc class='stripe-element card-cvc'
+      ref='cardCvc'
+      :stripe='stripe'
+      :options='options'
+      version:'2020-03-02'
+      @change='cvc = $event.complete'
+    />
+  </div>
+</template>
+```

@@ -5,6 +5,7 @@
     :stripe='stripe'
     :value='value'
     :options='options'
+    :version="version"
     @blur='$emit("blur")'
     @focus='$emit("focus")'
     @change='$emit("change", $event)'
