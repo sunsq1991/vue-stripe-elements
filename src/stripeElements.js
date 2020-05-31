@@ -1,19 +1,20 @@
 export const Stripe = {
-  instance: null,
-  createToken: null,
-  createSource: null,
-  retrieveSource: null,
-  paymentRequest: null,
-  redirectToCheckout: null,
-  retrievePaymentIntent: null,
-  handleCardPayment: null,
-  handleCardSetup: null,
-  handleCardAction: null,
-  confirmCardPayment: null,
-  confirmPaymentIntent: null,
-  createPaymentMethod: null,
-  elements: null
-}
+         instance: null,
+         createToken: null,
+         createSource: null,
+         retrieveSource: null,
+         paymentRequest: null,
+         redirectToCheckout: null,
+         retrievePaymentIntent: null,
+         handleCardPayment: null,
+         handleCardSetup: null,
+         handleCardAction: null,
+         confirmCardPayment: null,
+         confirmPaymentIntent: null,
+         createPaymentMethod: null,
+         elements: null,
+         setStripeAccount: null,
+       };
 
 export const baseStyle = {
   base: {
@@ -32,26 +33,29 @@ export const baseStyle = {
   }
 }
 
-function init(key, options = {}) {
+function init(key, options = {}, stripe_api_version = null) {
   if (typeof key === "object" && typeof key.elements === "function") {
-    Stripe.instance = key
+    Stripe.instance = key;
   }
 
   if (window.Stripe === undefined && Stripe.instance === null) {
-    console.error('Stripe V3 library not loaded!')
+    console.error("Stripe V3 library not loaded!");
   } else if (Stripe.instance === null) {
-    Stripe.instance = window.Stripe(key)
+    if (stripe_api_version)
+      Stripe.instance = window.Stripe(key, { apiVersion: stripe_api_version });
+    else
+      Stripe.instance = window.Stripe(key);  
   }
 
   if (!Stripe.instance.elements) {
-    console.error('Stripe V3 library not loaded!')
+    console.error("Stripe V3 library not loaded!");
   } else if (Stripe.elements === null) {
-    Stripe.elements = Stripe.instance.elements(options)
+    Stripe.elements = Stripe.instance.elements(options);
   }
 }
 
-export function create(elementType, key_or_stripe, options = {}) {
-  init(key_or_stripe, options.elements || {})
+export function create(elementType, key_or_stripe, options = {}, stripe_api_version = null) {
+  init(key_or_stripe, options.elements || {}, stripe_api_version);
   options.style = Object.assign({}, options.style || baseStyle)
 
   const element = Stripe.elements.create(elementType, options)
@@ -68,7 +72,11 @@ export function create(elementType, key_or_stripe, options = {}) {
   Stripe.confirmCardPayment = (clientSecret, data) => Stripe.instance.confirmCardPayment(clientSecret, {payment_method:{card: element}}, data)
   Stripe.confirmPaymentIntent = (clientSecret, data) => Stripe.instance.confirmPaymentIntent(clientSecret, element, data)
   Stripe.createPaymentMethod = (cardType, data) => Stripe.instance.createPaymentMethod(cardType, element, data)
-  
+  Stripe.setStripeAccount = (stripe_account, key) => {
+    Stripe.instance = window.Stripe(key, {
+      stripeAccount: stripe_account,
+    });
+  };
   return element
 }
 
