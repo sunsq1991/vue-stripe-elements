@@ -1,7 +1,7 @@
 {
   "name": "vue-stripe-elements-plus-sa",
-  "version": "0.3.4",
-  "description": "Stripe Elements components for Vue",
+  "version": "0.3.5",
+  "description": "Stripe Elements components for Vue (Custom stripe version and can set locale)",
   "main": "./dist/index.js",
   "scripts": {
     "build": "webpack",

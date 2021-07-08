@@ -33,7 +33,7 @@ export const baseStyle = {
   }
 }
 
-function init(key, options = {}, stripe_api_version = null) {
+function init(key, options = {}, stripe_options ) {
   if (typeof key === "object" && typeof key.elements === "function") {
     Stripe.instance = key;
   }
@@ -41,8 +41,9 @@ function init(key, options = {}, stripe_api_version = null) {
   if (window.Stripe === undefined && Stripe.instance === null) {
     console.error("Stripe V3 library not loaded!");
   } else if (Stripe.instance === null) {
-    if (stripe_api_version)
-      Stripe.instance = window.Stripe(key, { apiVersion: stripe_api_version });
+
+    if (stripe_options)
+      Stripe.instance = window.Stripe(key, stripe_options);
     else
       Stripe.instance = window.Stripe(key);  
   }
@@ -54,8 +55,8 @@ function init(key, options = {}, stripe_api_version = null) {
   }
 }
 
-export function create(elementType, key_or_stripe, options = {}, stripe_api_version = null) {
-  init(key_or_stripe, options.elements || {}, stripe_api_version);
+export function create(elementType, key_or_stripe, options = {}, stripe_options = null) {
+  init(key_or_stripe, options.elements || {}, stripe_options);
   options.style = Object.assign({}, options.style || baseStyle)
 
   const element = Stripe.elements.create(elementType, options)

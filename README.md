@@ -189,7 +189,7 @@ export default {
 }
 </script>
 ```
-## Set Stripe Api version:
+## Set Stripe Api version or locale:
 this is to use different stripe api version from your dashboard configured version,
 ```html
 <template>
@@ -198,21 +198,21 @@ this is to use different stripe api version from your dashboard configured versi
       ref='cardNumber'
       :stripe='stripe'
       :options='options'
-      version:'2020-03-02'
+      stripeOptions:"{apiVersion:'stripe-api-version', locale:'es'}"
       @change='number = $event.complete'
     />
     <card-expiry class='stripe-element card-expiry'
       ref='cardExpiry'
       :stripe='stripe'
       :options='options'
-      version:'2020-03-02'
+      stripeOptions:"{apiVersion:'stripe-api-version', locale:'es'}"
       @change='expiry = $event.complete'
     />
     <card-cvc class='stripe-element card-cvc'
       ref='cardCvc'
       :stripe='stripe'
       :options='options'
-      version:'2020-03-02'
+      stripeOptions:"{apiVersion:'stripe-api-version', locale:'es'}"
       @change='cvc = $event.complete'
     />
   </div>
