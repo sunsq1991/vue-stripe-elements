@@ -11,8 +11,8 @@ export default {
     type: Object,
     required: false,
   },
-  version: {
-    type: String,
+  stripeOptions: {
+    type: Object,
     required: false,
   },
 };

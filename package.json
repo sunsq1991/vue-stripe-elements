@@ -1,6 +1,6 @@
 {
   "name": "vue-stripe-elements-plus-sa",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "description": "Stripe Elements components for Vue (Custom stripe version and can set locale)",
   "main": "./dist/index.js",
   "scripts": {
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fromatob/vue-stripe-elements.git"
+    "url": "git+https://github.com/perle-rare/vue-stripe-elements.git"
   },
   "keywords": [
     "vue",
